@@ -1,0 +1,200 @@
+<app-ios-notify></app-ios-notify>
+
+<!-- <nav class="navbar head-bg-purple">
+<div class="container-fluid">
+<div class="navbar-header">
+<h3 class="p-t-10 p-b-5 p-r-10">
+<a (click)="clickBack()" class="p-r-15">
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 18 18" fill="#fff">
+<path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"></path>
+</svg>
+</a>Feedback
+</h3>
+</div>
+</div>
+</nav> -->
+
+
+
+<nav class="navbar head-bg-purple animate fadeIn nav-height" id="nav-fade">
+	<div class="container-fluid no-pad h-100">
+		<div class="navbar-header col-md-12 no-pad no-margin h-100">
+			<span class="svg-icon p-l-20">
+				<a (click)="clickBack()" class="p-r-15">
+					<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 18 18"
+						fill="#fff">
+						<path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"></path>
+					</svg>
+				</a>
+			</span>
+			<span class="headtext">
+				<h3 class="h3-style">Feedback</h3>
+			</span>
+		</div>
+	</div>
+</nav>
+
+
+
+
+
+<!-- #Top Bar -->
+<section class="content">
+	<div class="container-fluid">
+		<div class="row clearfix p-l-5 p-r-5" id="vieworder">
+			<div class="col-md-12 no-pad p-t-20">
+				<mat-card class="radius4 mat-elevation-z2">
+					<form id="smileys" name="feedback" ng-if="feedback_status_form">
+
+						<!--1-->
+						<div class="col-xs-12 no-pad">
+							<div class="col-xs-12 p-t-15 p-b-15 no-pad">
+								<h4>Quality</h4>
+							</div>
+							<div class="col-xs-12 no-pad ptb15">
+								<div class="hr-theme-slash-2">
+									<div class="hr-icon"><input type="radio" name="quality" value="1"
+											[(ngModel)]="feedForm.quality" class="verypoor" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="quality" value="2"
+											[(ngModel)]="feedForm.quality" class="poor" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="quality" value="3"
+											[(ngModel)]="feedForm.quality" class="average" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="quality" value="4"
+											[(ngModel)]="feedForm.quality" class="good" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="quality" value="5"
+											[(ngModel)]="feedForm.quality" class="vgood" /></div>
+								</div>
+								<div class="hr-theme-slash-2">
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Very Poor</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Poor</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Average</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Satisfactory</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Very Good</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--#1-->
+
+						<!--2-->
+						<div class="col-xs-12 no-pad m-t-20">
+							<div class="col-xs-12 p-t-15 p-b-15 no-pad">
+								<h4>Service</h4>
+							</div>
+							<div class="col-xs-12 no-pad ptb15">
+								<div class="hr-theme-slash-2">
+									<div class="hr-icon"><input type="radio" name="service" value="1"
+											[(ngModel)]="feedForm.service" class="verypoor" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="service" value="2"
+											[(ngModel)]="feedForm.service" class="poor" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="service" value="3"
+											[(ngModel)]="feedForm.service" class="average" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="service" value="4"
+											[(ngModel)]="feedForm.service" class="good" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="service" value="5"
+											[(ngModel)]="feedForm.service" class="vgood" /></div>
+								</div>
+								<div class="hr-theme-slash-2">
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Very Poor</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Poor</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Average</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Satisfactory</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Very Good</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--#2-->
+
+						<!--3-->
+						<div class="col-xs-12 no-pad m-t-20">
+							<div class="col-xs-12 p-t-15 p-b-15 no-pad">
+								<h4>Pricing</h4>
+							</div>
+							<div class="col-xs-12 no-pad ptb15">
+								<div class="hr-theme-slash-2">
+									<div class="hr-icon"><input type="radio" name="pricing" value="1"
+											[(ngModel)]="feedForm.pricing" class="verypoor" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="pricing" value="2"
+											[(ngModel)]="feedForm.pricing" class="poor" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="pricing" value="3"
+											[(ngModel)]="feedForm.pricing" class="average" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="pricing" value="4"
+											[(ngModel)]="feedForm.pricing" class="good" /></div>
+									<div class="hr-line"></div>
+									<div class="hr-icon"><input type="radio" name="pricing" value="5"
+											[(ngModel)]="feedForm.pricing" class="vgood" /></div>
+								</div>
+								<div class="hr-theme-slash-2">
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Very Poor</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Poor</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Average</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Satisfactory</div>
+									</div>
+									<div class="hr-line1"></div>
+									<div class="hr-icon">
+										<div class="width-38px font-italic font-bold500">Very Good</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--#3-->
+
+						<div class="clearfix">&nbsp;</div>
+						<div class="col-xs-12 no-rightpad p-t-15" align="right">
+							<button type="button" (click)="onSubmit()" class="btn btn-link waves-effect">SUBMIT</button>
+						</div>
+					</form>
+					<div class="clearfix">&nbsp;</div>
+				</mat-card>
+			</div>
+		</div>
+	</div>
+</section>

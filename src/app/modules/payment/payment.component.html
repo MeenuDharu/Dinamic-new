@@ -1,0 +1,17 @@
+<!-- <p>
+  {{payment | json}}
+</p> -->
+
+<div *ngIf="loaderStatus" id="loader" class="pr__dark" [ngClass]="browserService.isChrome ? 'preloader-webp' : 'preloader'">
+	<span class="progress">
+		<div class="mobile-preloader">
+			<div class="pre-container">
+				<div class="logo-circle">
+					<div class="center">
+						<img src="assets/images/Dinamic_Logo.svg">
+					</div>
+				</div>
+			</div>
+		</div>
+	</span>
+</div>

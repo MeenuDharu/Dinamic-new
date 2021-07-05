@@ -1,0 +1,79 @@
+<!-- Signup modal -->
+<div bsModal #signupModal="bs-modal" class="modal fade custom-modal" [config]="{backdrop: 'static'}" tabindex="-1"
+	role="dialog" aria-labelledby="dialog-signup">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content mat-elevation-z2">
+			<div class="modal-header">
+				<div align="right">
+					<a (click)="signupModal.hide()">
+						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
+							fill="#616161">
+							<path
+								d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
+						</svg>
+					</a>
+				</div>
+			</div>
+			<!-- <form class="mat-form" autocomplete="off" (ngSubmit)="userRegister(signupModal, otpModal)" ngNativeValidate> -->
+			<form class="mat-form" autocomplete="off" (ngSubmit)="userRegisterNew(loginModal)" ngNativeValidate>
+				<div class="modal-body p-b-20 p-t-0 p-l-20 p-r-20" align="center">
+					<div class="login-logo">
+						<img src="assets/images/dinamic-blogo.svg" class="img-responsive">
+					</div>
+					<div class="clearfix" style="margin-top:20%">&nbsp;</div>
+					<p class="p-t-10 p-b-10">Create your account</p>
+					<div class="col-md-12 no-pad mat-elevation-z2 login-page">
+						<mat-form-field [hideRequiredMarker]=true class="mat-full-width">
+							<input matInput name="name" placeholder="Name" [(ngModel)]="signupForm.name" #name="ngModel"
+								(input)="signupForm.error_msg=false;" required>
+						</mat-form-field>
+						<mat-form-field [hideRequiredMarker]=true class="mat-full-width">
+							<input matInput type="email" name="email" placeholder="Email" [(ngModel)]="signupForm.email"
+								#email="ngModel" (input)="signupForm.error_msg=false;" required>
+						</mat-form-field>
+						<mat-form-field [hideRequiredMarker]=true class="mat-full-width">
+							<input matInput type="tel" name="mobile" placeholder="Mobile"
+								[(ngModel)]="signupForm.mobile" #mobile="ngModel" (input)="signupForm.error_msg=false;"
+								pattern=".{10,10}" title="Invalid mobile number" maxlength="10" appNumberOnly required>
+						</mat-form-field>
+						<mat-form-field [hideRequiredMarker]=true class="mat-full-width">
+							<input matInput name="password" placeholder="Password" [(ngModel)]="signupForm.password"
+								#password="ngModel" (input)="signupForm.error_msg=false;"
+								[type]="sp_hide? 'password': 'text'" pattern=".{6,}" title="Six or more characters"
+								required>
+							<mat-icon matSuffix (click)="sp_hide = !sp_hide">{{sp_hide? 'visibility_off': 'visibility'}}
+							</mat-icon>
+						</mat-form-field>
+						<mat-form-field [hideRequiredMarker]=true class="mat-full-width">
+							<input matInput type="password" name="confirm_password" placeholder="Confirm Password"
+								[(ngModel)]="signupForm.confirm_password" #confirm_password="ngModel"
+								(input)="signupForm.error_msg=false;" pattern=".{6,}" title="Six or more characters"
+								required>
+							<mat-icon matSuffix><i style="color: #32CD32;"
+									*ngIf="signupForm.confirm_password && signupForm.password==signupForm.confirm_password"
+									class="material-icons">check_circle</i></mat-icon>
+						</mat-form-field>
+						<div align="left"
+							*ngIf="signupForm.confirm_password && signupForm.password!=signupForm.confirm_password">
+							<div class="error-msg">Mismatch password</div>
+						</div>
+						<div class="modal-footer p-t-10 p-b-10">
+							<div align="center">
+								<button type="submit"
+									[disabled]="signupForm.password!=signupForm.confirm_password || signupForm.submit"
+									class="btn log-btn waves-effect">
+									Register <i [ngClass]="signupForm.submit ? 'fa fa-circle-o-notch fa-spin' : ''"></i>
+								</button>
+							</div>
+						</div>
+
+					</div>
+					<div *ngIf="signupForm.error_msg" class="col-md-12 no-pad">
+						<p class="error-msg">{{ signupForm.error_msg }}</p>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
