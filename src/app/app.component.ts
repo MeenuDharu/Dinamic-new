@@ -6,7 +6,7 @@ import { Location, PopStateEvent } from "@angular/common";
 import { ApiService } from './_services/api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { DOCUMENT } from '@angular/common';
-declare const navigator: any; 
+declare const navigator: any;
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -16,11 +16,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	private lastPoppedUrl: string;
 	private yScrollStack: number[] = [];
-	cookieValue:any=[]; 
-	orderValue:any=[]; 
-	compareval:any;
-	orders:any = [];
-	styles:any;
+	cookieValue: any = [];
+	orderValue: any = [];
+	compareval: any;
+	orders: any = [];
+	dynamicThemeObject: any;
 	// @HostListener('window:focus', ['$event'])
 	// onFocus(event: FocusEvent): void {
 
@@ -34,42 +34,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	//  }
 
-	constructor(@Inject(DOCUMENT) private document,private router: Router, private socket: Socket, private location: Location, public apiService: ApiService, public userService: UserService,private cookieService: CookieService) {
-		
+	constructor(@Inject(DOCUMENT) private document, private router: Router, private socket: Socket, private location: Location, public apiService: ApiService, public userService: UserService, private cookieService: CookieService) {
 
 
-// 		window.addEventListener('message', e => {
-// 			console.log("Trigger2...................", e)
-// 			const input = <HTMLInputElement>document.querySelector('input[autocomplete="one-time-code"]');
-// // 			var inp = <HTMLInputElement>document.querySelector('input[type="text"]');
-// // console.log(inp.value);
-// 			if (!input) return;
-// 			const ac = new AbortController();
-// 			const form = input.closest('form');
-// 			if (form) {
-// 				console.log("Form data................");
-// 			  form.addEventListener('submit', e => {
-// 				setTimeout(() => {
-// 					ac.abort();
-// 				  }, 1 * 60 * 1000);
-// 			  });
-// 			}
-// 			navigator.credentials.get({			
-// 			  otp: { transport:['sms'] },
-// 			  signal: ac.signal
-// 			}).then(otp => {
-// 				console.log("OTP2...............................", otp)
-// 			 input.value = otp.code;
-			 
-// 			//   if (form) form.submit();
-// 			}).catch(err => {
-// 			  console.log("navigator error...............",err);
-// 			});
-// 		  });
-		// this.document.addEventListener('readystatechange', e => {
-		// 	if(e.target.readyState === "complete") {
-			 
-			
+
+		// 		window.addEventListener('message', e => {
 		// 			console.log("Trigger2...................", e)
 		// 			const input = <HTMLInputElement>document.querySelector('input[autocomplete="one-time-code"]');
 		// // 			var inp = <HTMLInputElement>document.querySelector('input[type="text"]');
@@ -91,29 +60,60 @@ export class AppComponent implements OnInit, AfterViewInit {
 		// 			}).then(otp => {
 		// 				console.log("OTP2...............................", otp)
 		// 			 input.value = otp.code;
-					 
+
+		// 			//   if (form) form.submit();
+		// 			}).catch(err => {
+		// 			  console.log("navigator error...............",err);
+		// 			});
+		// 		  });
+		// this.document.addEventListener('readystatechange', e => {
+		// 	if(e.target.readyState === "complete") {
+
+
+		// 			console.log("Trigger2...................", e)
+		// 			const input = <HTMLInputElement>document.querySelector('input[autocomplete="one-time-code"]');
+		// // 			var inp = <HTMLInputElement>document.querySelector('input[type="text"]');
+		// // console.log(inp.value);
+		// 			if (!input) return;
+		// 			const ac = new AbortController();
+		// 			const form = input.closest('form');
+		// 			if (form) {
+		// 				console.log("Form data................");
+		// 			  form.addEventListener('submit', e => {
+		// 				setTimeout(() => {
+		// 					ac.abort();
+		// 				  }, 1 * 60 * 1000);
+		// 			  });
+		// 			}
+		// 			navigator.credentials.get({			
+		// 			  otp: { transport:['sms'] },
+		// 			  signal: ac.signal
+		// 			}).then(otp => {
+		// 				console.log("OTP2...............................", otp)
+		// 			 input.value = otp.code;
+
 		// 			  if (form) form.submit();
 		// 			}).catch(err => {
 		// 			  console.log("navigator error...............",err);
 		// 			});
-				 
+
 		// 	}
 		//   });
 
 
 
-	 }
+	}
 
 	ngOnInit() {
 
-		this.styles = [
-			{ name: 'primary', value: "#232323" }
-			
-		  ];
-	  
-	   this.styles.forEach(data => {
-			document.documentElement.style.setProperty(`--${data.name}`, data.value);
-	   });
+		// this.styles = [
+		// 	{ name: 'primary', value: "#232323" }
+
+		// ];
+
+		// this.styles.forEach(data => {
+		// 	document.documentElement.style.setProperty(`--${data.name}`, data.value);
+		// });
 
 
 		localStorage.getItem('restaurant_details')
@@ -123,6 +123,23 @@ export class AppComponent implements OnInit, AfterViewInit {
 			if (event instanceof NavigationEnd) {
 				window.scrollTo(0, 0);
 				console.log("navigation end");
+
+				const restaurant_details = JSON.parse(localStorage.getItem('restaurant_details')!);
+				console.log("restaurant_details_for_theme_color:", restaurant_details);
+				if (restaurant_details) {
+					this.apiService.THEME_LIST({ "pos_rest_id": restaurant_details.company_id }).subscribe((result) => {
+						console.log("theme result", result);
+						this.dynamicThemeObject = result.data
+						let themeArray = [];
+						Object.entries(this.dynamicThemeObject).forEach(([key, value]) => {
+							themeArray.push({name: key, value: value});
+						});
+						themeArray.forEach((data: any) => {
+							document.documentElement.style.setProperty(`--${data.name}`, data.value);
+						});
+					});
+				}
+
 				// document.querySelector("#cartarea").classList.remove("pointer-none");
 				// document.querySelector("#cart-summary").classList.remove("section-fade");
 			}
@@ -148,21 +165,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 		/** table check */
 
 
-
-
-
-
-
-
-
-		
-
-
 		let resturant_det = JSON.parse(localStorage.getItem('restaurant_details'));
 		let userdetails = JSON.parse(localStorage.getItem('user_details'));
 		let valet_details = JSON.parse(localStorage.getItem('valet_details'));
 		// let valet_status =  localStorage.getItem("valet_staus");
-        console.log("app restaurant details..............",JSON.parse(localStorage.getItem('restaurant_details')))
+		console.log("app restaurant details..............", JSON.parse(localStorage.getItem('restaurant_details')))
 		let order_id = localStorage.getItem('pos_order_id');
 		console.log("app valet_details app..............", valet_details);
 		// if(resturant_det) {
@@ -179,10 +186,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 				// 	this.socket.emit("take_away", order_id);
 				// }
 				console.log("take away");
-			this.cookieValue = this.cookieService.get('socket_rooms'); // To Get Cookie
+				this.cookieValue = this.cookieService.get('socket_rooms'); // To Get Cookie
 				//this.cookieValue = {"123456":"123456","TA20200630113350563":"TA20200630113350563","TA20200630113749741":"TA20200630113749741","lwXzlaHtXwmGtpqJAAMX":"lwXzlaHtXwmGtpqJAAMX"}
-				
-				console.log("cookie value...............",this.cookieValue);
+
+				console.log("cookie value...............", this.cookieValue);
 
 				// for (let cval of Object.values(this.cookieValue)) {
 				// 	console.log("cvalue................",cval);
@@ -201,44 +208,40 @@ export class AppComponent implements OnInit, AfterViewInit {
 				//   }
 				this.cookieService.delete('socket_rooms', '/', '.dinamic.io', true, 'Strict');
 				order_id = localStorage.getItem('pos_order_id');
-				if(localStorage.getItem('pos_order_id'))
-				{
+				if (localStorage.getItem('pos_order_id')) {
 					this.socket.emit("take_away", order_id);
 				}
 				this.apiService.GET_ALL_MY_ORDERS().subscribe(result => {
 					console.log("All my orders.....", result);
-						if (result.orders) {						
-							this.userService.live_orders = [];
-							this.orders = result.orders;
-							let order_id = {};
-							result.orders.forEach(element => {
+					if (result.orders) {
+						this.userService.live_orders = [];
+						this.orders = result.orders;
+						let order_id = {};
+						result.orders.forEach(element => {
 
-								if (element.is_live) {
-									if(localStorage.getItem('pos_order_id'))
-									{	
-										if(element.order_id != localStorage.getItem('pos_order_id'))
-										{
-											this.socket.emit("take_away", element.order_id);
-										}										
-									}
-									else
-									{
+							if (element.is_live) {
+								if (localStorage.getItem('pos_order_id')) {
+									if (element.order_id != localStorage.getItem('pos_order_id')) {
 										this.socket.emit("take_away", element.order_id);
 									}
+								}
+								else {
+									this.socket.emit("take_away", element.order_id);
+								}
 								this.userService.orders.order_id = element.order_id;
-									this.userService.live_orders.push(element);						
-								} 
-							});
-			
-						}
-			
-					})
+								this.userService.live_orders.push(element);
+							}
+						});
 
-					console.log("this.orders..............", this.userService.orders)
+					}
+
+				})
+
+				console.log("this.orders..............", this.userService.orders)
 
 				// for(var prop in this.cookieValue) {
 				// 	console.log(prop,this.cookieValue[prop]); 
-				
+
 				//   }
 
 				// for(let i=0; i++; i<this.cookieValue.length)
@@ -251,7 +254,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 				// 	}
 				// }
 
-				
+
 			}
 			else {
 				this.socket.emit("table_engaged", resturant_det.table_id);
@@ -284,7 +287,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	}
 
-	openModal(modal){
+	openModal(modal) {
 		console.log("openmodal popup already existing user")
 		modal.show();
 	}

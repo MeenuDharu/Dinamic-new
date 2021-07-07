@@ -386,9 +386,12 @@ export class ApiService {
 	GET_VALET_DETAILS_STATUS(x) {
 		return this.http.post<any>(environment.ws_url + '/user/auth/get_valet_details_STATUS', x);
 	}
-	PAYMENT_GATEWAY_DETAILS(x)
-	{
+	PAYMENT_GATEWAY_DETAILS(x) {
 		return this.http.post<any>(environment.ws_url + '/user/auth/payment_gateway_details', x);
+	}
+
+	THEME_LIST(x: any) {
+		return this.http.post<any>(environment.ws_url + '/user/theme/getTheme', x);
 	}
 
 }

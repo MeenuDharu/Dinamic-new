@@ -1,7 +1,7 @@
   export const environment = {    
     production: false,
      //ws_url: 'https://dinamic.io/mobileapi',
-     ws_url: 'http://192.168.1.8:4000', 
+     ws_url: 'http://192.168.43.247:4000', 
      socket_url: 'https://dinamic.io',
      img_url: 'https://dinamic.io/api/', 
      baseUrl:'https://dinamic.io/api', 
